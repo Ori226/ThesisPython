@@ -23,10 +23,27 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="cA.py" />
+    <Compile Include="convolutional_mlp.py" />
+    <Compile Include="dA.py" />
+    <Compile Include="DBN.py" />
+    <Compile Include="imdb.py" />
+    <Compile Include="imdb_preprocess.py" />
+    <Compile Include="logistic_cg.py" />
+    <Compile Include="logistic_sgd.py" />
+    <Compile Include="lstm.py" />
+    <Compile Include="mlp.py" />
     <Compile Include="module1.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="PythonApplication1.py" />
+    <Compile Include="rbm.py" />
+    <Compile Include="rnnrbm.py" />
+    <Compile Include="rnnslu.py" />
+    <Compile Include="SdA.py" />
+    <Compile Include="test.py" />
+    <Compile Include="TestGPU.py" />
+    <Compile Include="utils.py" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
