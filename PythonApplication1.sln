@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "MyFirstCommiy", "PythonApplication1\MyFirstCommiy.pyproj", "{AA9B0B5A-134C-4638-8622-A35E8838EAC2}"
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "TheanoCode", "..\TheanoCode\TheanoCode.pyproj", "{70B536F8-F56D-4265-B0B4-519C8E27BBDE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,8 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{AA9B0B5A-134C-4638-8622-A35E8838EAC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AA9B0B5A-134C-4638-8622-A35E8838EAC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70B536F8-F56D-4265-B0B4-519C8E27BBDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70B536F8-F56D-4265-B0B4-519C8E27BBDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
