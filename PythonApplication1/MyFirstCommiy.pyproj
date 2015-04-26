@@ -6,13 +6,23 @@
     <ProjectGuid>aa9b0b5a-134c-4638-8622-a35e8838eac2</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>PythonApplication1.py</StartupFile>
+    <StartupFile>keras_examlpes\keras_mlp.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>MyFirstCommiy</Name>
     <RootNamespace>PythonApplication1</RootNamespace>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <CommandLineArguments>
+    </CommandLineArguments>
+    <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
+    <InterpreterArguments>
+    </InterpreterArguments>
+    <InterpreterId>
+    </InterpreterId>
+    <InterpreterVersion>
+    </InterpreterVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -29,6 +39,19 @@
     <Compile Include="DBN.py" />
     <Compile Include="imdb.py" />
     <Compile Include="imdb_preprocess.py" />
+    <Compile Include="IndicoTutorial\indico_part1.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IndicoTutorial\indico_tutorial.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IndicoTutorial\load.py" />
+    <Compile Include="keras_examlpes\imdb_lstm.py" />
+    <Compile Include="keras_examlpes\kaggle_otto_nn.py" />
+    <Compile Include="keras_examlpes\keras_mlp.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="keras_examlpes\reuters_mlp.py" />
     <Compile Include="logistic_cg.py" />
     <Compile Include="logistic_sgd.py" />
     <Compile Include="lstm.py" />
@@ -43,7 +66,33 @@
     <Compile Include="SdA.py" />
     <Compile Include="test.py" />
     <Compile Include="TestGPU.py" />
+    <Compile Include="try_out\Layer.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="try_out\module1.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="try_out\module2.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="try_out\module3.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="try_out\MyMLP.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="try_out\my_functions.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="try_out\test_theano_optimiation.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="utils.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="IndicoTutorial\" />
+    <Folder Include="keras_examlpes\" />
+    <Folder Include="try_out\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

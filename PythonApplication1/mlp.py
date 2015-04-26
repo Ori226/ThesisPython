@@ -348,6 +348,9 @@ def test_mlp(learning_rate=0.01, L1_reg=0.00, L2_reg=0.0001, n_epochs=1000,
             minibatch_avg_cost = train_model(minibatch_index)
             # iteration number
             iter = (epoch - 1) * n_train_batches + minibatch_index
+            
+            if (iter + 1) % 100 == 0:
+                print(iter,  ' '),
 
             if (iter + 1) % validation_frequency == 0:
                 # compute zero-one loss on validation set
@@ -401,4 +404,4 @@ def test_mlp(learning_rate=0.01, L1_reg=0.00, L2_reg=0.0001, n_epochs=1000,
 
 
 if __name__ == '__main__':
-    test_mlp()
+    test_mlp(n_epochs=10)

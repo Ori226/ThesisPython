@@ -8,6 +8,7 @@ import numpy
 
 import theano
 import theano.tensor as T
+import my_functions
 from theano.tensor.shared_randomstreams import RandomStreams
 
 from logistic_sgd import LogisticRegression, load_data
