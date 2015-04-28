@@ -6,7 +6,7 @@
     <ProjectGuid>aa9b0b5a-134c-4638-8622-a35e8838eac2</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>keras_examlpes\keras_mlp.py</StartupFile>
+    <StartupFile>using_keras\just_simple_sandbox.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -37,6 +37,12 @@
     <Compile Include="convolutional_mlp.py" />
     <Compile Include="dA.py" />
     <Compile Include="DBN.py" />
+    <Compile Include="HelperForThesisData\LoadThesisData.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="HelperForThesisData\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="imdb.py" />
     <Compile Include="imdb_preprocess.py" />
     <Compile Include="IndicoTutorial\indico_part1.py">
@@ -46,6 +52,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="IndicoTutorial\load.py" />
+    <Compile Include="using_keras\just_simple_sandbox.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="keras_examlpes\imdb_lstm.py" />
     <Compile Include="keras_examlpes\kaggle_otto_nn.py" />
     <Compile Include="keras_examlpes\keras_mlp.py">
@@ -87,11 +96,16 @@
     <Compile Include="try_out\test_theano_optimiation.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="using_keras\test_inheritance.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="utils.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="IndicoTutorial\" />
     <Folder Include="keras_examlpes\" />
+    <Folder Include="HelperForThesisData\" />
+    <Folder Include="using_keras\" />
     <Folder Include="try_out\" />
   </ItemGroup>
   <PropertyGroup>
