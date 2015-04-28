@@ -17,6 +17,7 @@ import time
 print 'start'
 
 
+
 #pickle.dump( all_save_samples, open( "all_res.p", "wb" ) )
 
 
