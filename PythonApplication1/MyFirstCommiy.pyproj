@@ -6,9 +6,8 @@
     <ProjectGuid>aa9b0b5a-134c-4638-8622-a35e8838eac2</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>using_keras\just_simple_sandbox.py</StartupFile>
-    <SearchPath>
-    </SearchPath>
+    <StartupFile>using_keras\TrySparAutoEncoder.py</StartupFile>
+    <SearchPath>indian_autoencoder\custom_io\;custom_io\;..\..\..\..\..\..\..\Anaconda\Lib\site-packages\keras-master\keras\</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>MyFirstCommiy</Name>
@@ -35,6 +34,13 @@
   <ItemGroup>
     <Compile Include="cA.py" />
     <Compile Include="convolutional_mlp.py" />
+    <Compile Include="custom_io\imsave2.py" />
+    <Compile Include="custom_io\load_data.py" />
+    <Compile Include="custom_io\logistic_sgd.py" />
+    <Compile Include="custom_io\make_video.py" />
+    <Compile Include="custom_io\model_io.py" />
+    <Compile Include="custom_io\utils.py" />
+    <Compile Include="custom_io\__init__.py" />
     <Compile Include="dA.py" />
     <Compile Include="DBN.py" />
     <Compile Include="HelperForThesisData\LoadThesisData.py">
@@ -45,6 +51,19 @@
     </Compile>
     <Compile Include="imdb.py" />
     <Compile Include="imdb_preprocess.py" />
+    <Compile Include="indian_autoencoder\imsave2.py" />
+    <Compile Include="indian_autoencoder\indian_auto_encoder.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="indian_autoencoder\load_data.py" />
+    <Compile Include="indian_autoencoder\logistic_sgd.py" />
+    <Compile Include="indian_autoencoder\make_video.py" />
+    <Compile Include="indian_autoencoder\model_io.py" />
+    <Compile Include="indian_autoencoder\TrySimpleSplitLayer.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="indian_autoencoder\utils.py" />
+    <Compile Include="indian_autoencoder\__init__.py" />
     <Compile Include="IndicoTutorial\indico_part1.py">
       <SubType>Code</SubType>
     </Compile>
@@ -52,7 +71,16 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="IndicoTutorial\load.py" />
-    <Compile Include="using_keras\just_simple_sandbox.py">
+    <Compile Include="try_out\MyLogisticRegression.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="try_out\Print.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="using_keras\AutoEncoderANN.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="using_keras\ExperimetSimpleMlp.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="keras_examlpes\imdb_lstm.py" />
@@ -96,7 +124,22 @@
     <Compile Include="try_out\test_theano_optimiation.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="using_keras\KerasAutoencoder.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="using_keras\simple_sandbox.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="using_keras\test_inheritance.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="using_keras\Try1DConv.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="using_keras\TryDenoisedAutoencoder.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="using_keras\TrySparAutoEncoder.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="utils.py" />
@@ -105,6 +148,8 @@
     <Folder Include="IndicoTutorial\" />
     <Folder Include="keras_examlpes\" />
     <Folder Include="HelperForThesisData\" />
+    <Folder Include="indian_autoencoder\" />
+    <Folder Include="custom_io\" />
     <Folder Include="using_keras\" />
     <Folder Include="try_out\" />
   </ItemGroup>
