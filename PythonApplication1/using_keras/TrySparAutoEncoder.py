@@ -6,11 +6,12 @@ import skimage
 import sklearn
 from sklearn import preprocessing,cross_validation
 
-import os,pdb
+import os,sys,pdb
+
 
 import theano
 from theano import tensor as T
-import os,sys
+
 
 from keras.models import Sequential
 from keras.layers.core import Dense, Dropout, Activation, Layer, initializations, activations
@@ -47,34 +48,18 @@ class Dense2(Layer):
         Just your regular fully connected NN layer.
     '''
     def __init__(self, input_dim, hidden_dim, init='glorot_uniform', activation='linear', weights=None):
-
-
-
         nvis = input_dim
         nhid = hidden_dim
         W_shape = nhid,nvis
         lim=np.sqrt(6./(2*nvis+1))
         W_init=np.random.uniform(-lim,lim,W_shape)
         W=theano.shared(W_init)
-    
+
         hbias=theano.shared(np.zeros((nhid,1)),broadcastable=[False,True])
-
-        #U_shape=nvis,nhid
-        #lim1=np.sqrt(6./(2*nhid+1))
-        #U_init=np.random.uniform(-lim1,lim1,U_shape)
-        #U=theano.shared(U_init)
-
-        #vbias=theano.shared(np.zeros((nvis,1)),broadcastable=[False,True])
-
-
-
-
-
 
         self.init = initializations.get(init)
         self.activation = activations.get(activation)
         self.input_dim = input_dim
-
         
         self.hidden_dim = hidden_dim
         self.output_dim = input_dim
@@ -107,7 +92,7 @@ class Dense2(Layer):
             "activation":self.activation.__name__}
 
 
-#temp = Dense2(256,100)
+
 
 
 Ols_mat_name='C:\Users\ori22_000\Documents\IDC-non-sync\Thesis\PythonApplication1\PythonApplication1\indian_autoencoder\IMAGES_RAW.mat'
@@ -160,21 +145,7 @@ valid=theano.shared(np.asarray( valid_,theano.config.floatX),'valid')
 ###
 
 nhid=100
-#W_shape=nhid,nvis
-#lim=np.sqrt(6./(2*nvis+1))
-#W_init=np.random.uniform(-lim,lim,W_shape)
-#W=theano.shared(W_init)
-    
-#hbias=theano.shared(np.zeros((nhid,1)),broadcastable=[False,True])
 
-#U_shape=nvis,nhid
-#lim1=np.sqrt(6./(2*nhid+1))
-#U_init=np.random.uniform(-lim1,lim1,U_shape)
-#U=theano.shared(U_init)
-
-#vbias=theano.shared(np.zeros((nvis,1)),broadcastable=[False,True])
-
-####
 
 
 
@@ -187,13 +158,7 @@ model = Sequential()
 model.add(Dense(256, nhid))
 model.add(Activation('sigmoid', target=0.05))
 model.add(Dense(nhid, 256))
-#model.add(Activation('tanh'))
-#model.add(Dropout(0.5))
-#model.add(Dense2(64, 64, init='uniform'))
-#model.add(Activation('tanh'))
-#model.add(Dropout(0.5))
-#model.add(Dense2(64, 1, init='uniform'))
-#model.add(Activation('softmax'))
+
 
 sgd = SGD(lr=0.1, decay=1e-6, momentum=0.9, nesterov=True)
 model.compile(loss='mean_squared_error', optimizer=sgd)
@@ -207,6 +172,5 @@ img_W_=show_row_vectors(final_w.T,tile_shape=W_tile_shape,tile_spacing=(2,2),img
 
 save_dir='MY_AE_tutorial'
 imsave2.imsave2(os.path.join(save_dir,'filters','1.png'),img_W_)
-# now see the results - only the encoder pattern
 
-#score = model.evaluate(X_test, y_test, batch_size=16)
+
