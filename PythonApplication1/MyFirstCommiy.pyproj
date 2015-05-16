@@ -6,8 +6,8 @@
     <ProjectGuid>aa9b0b5a-134c-4638-8622-a35e8838eac2</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>using_keras\TrySparAutoEncoder.py</StartupFile>
-    <SearchPath>indian_autoencoder\custom_io\;custom_io\;..\..\..\..\..\..\..\Anaconda\Lib\site-packages\keras-master\keras\</SearchPath>
+    <StartupFile>try_out\try_convolution.py</StartupFile>
+    <SearchPath>indian_autoencoder\custom_io\;custom_io\</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>MyFirstCommiy</Name>
@@ -71,10 +71,22 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="IndicoTutorial\load.py" />
+    <Compile Include="try_out\go_over_theano_debug.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="try_out\MyLogisticRegression.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="try_out\Print.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="try_out\simple_convolutional.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="try_out\TryDepool.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="try_out\try_convolution.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="using_keras\AutoEncoderANN.py">
@@ -136,7 +148,7 @@
     <Compile Include="using_keras\Try1DConv.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="using_keras\TryDenoisedAutoencoder.py">
+    <Compile Include="using_keras\TryStackedDenoisedAutoencoder.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="using_keras\TrySparAutoEncoder.py">

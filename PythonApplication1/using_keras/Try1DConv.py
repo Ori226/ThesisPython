@@ -5,6 +5,8 @@ from keras.layers.core import Dense, Dropout, Activation, Flatten
 from keras.layers.convolutional import Convolution2D, MaxPooling2D
 from keras.optimizers import SGD
 
+
+
 mat_no_target = scipy.io.loadmat('C:\\Users\\ori22_000\\Documents\\Thesis\\code_and_matlab\\flattened_data\\non_target_RSVP_Color116msVPfat.mat')
 mat = scipy.io.loadmat('C:\\Users\\ori22_000\\Documents\\Thesis\\code_and_matlab\\flattened_data\\all_target_RSVP_Color116msVPgcf.mat')
 all_target_metrix = mat['all_target_flatten']
@@ -52,6 +54,8 @@ model.add(Activation('softmax'))
 
 sgd = SGD(lr=0.1, decay=1e-6, momentum=0.9, nesterov=True)
 model.compile(loss='mean_squared_error', optimizer=sgd)
+
+
 
 model.fit(x, Y_train, batch_size=32, nb_epoch=100,  show_accuracy=True)
 
