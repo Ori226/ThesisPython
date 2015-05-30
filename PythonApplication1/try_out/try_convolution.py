@@ -9,9 +9,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+import pylab
+from PIL import Image
+
 theano.config.compute_test_value = 'warn' # Use 'warn' to activate this feature
 theano.config.exception_verbosity ='high'
-
 
 class Formatter(object):
     def __init__(self, im):
@@ -19,9 +21,6 @@ class Formatter(object):
     def __call__(self, x, y):
         z = self.im.get_array()[int(y), int(x)]
         return 'x={:.01f}, y={:.01f}, z={:.01f}'.format(x, y, z)
-
-
-
 
 def get_reconstructed_input(self, hidden):
         """ Computes the reconstructed input given the values of the hidden layer """
@@ -36,13 +35,11 @@ def get_reconstructed_input(self, hidden):
         rectified_linear_activation = lambda x: T.maximum(0.0, x)
         return rectified_linear_activation(stretch_unpooling_out + self.b_prime.dimshuffle('x', 0, 'x', 'x'))
 
-
-
 rng = numpy.random.RandomState(23455)
 
 # instantiate 4D tensor for input
 input = T.tensor4(name='input')
-input.tag.test_value = numpy.random.rand(3,639, 516).astype(theano.config.floatX)
+input.tag.test_value = numpy.random.rand(1,3,639, 516).astype(theano.config.floatX)
 
 # initialize shared variable for weights.
 w_shp = (1, 3,3, 3)
@@ -54,15 +51,13 @@ W = theano.shared( numpy.asarray(
                 size=w_shp),
             dtype=input.dtype), name ='W')
 
-
-
-
 temp_w = W.get_value()
 
-
-temp_w[0,0,:,:] =  numpy.asarray(np.hstack(( -3*np.ones((3,1)),  8*np.ones((3,1)),  -3*np.ones((3,1)))),dtype=input.dtype)
-temp_w[0,1,:,:] =  numpy.asarray(np.hstack(( 1*np.ones((3,1)),  -2*np.ones((3,1)),  1*np.ones((3,1)))),dtype=input.dtype)
-temp_w[0,2,:,:] =  numpy.asarray(np.hstack(( 1*np.ones((3,1)),  -2*np.ones((3,1)),  1*np.ones((3,1)))),dtype=input.dtype)
+#--- create a predefined filter:
+#temp_w[0,0,:,:] =  numpy.asarray(np.hstack(( -3*np.ones((3,1)),  8*np.ones((3,1)),  -3*np.ones((3,1)))),dtype=input.dtype)
+temp_w[0,0,:,:] =  numpy.asarray([[0,0,0],[0,1,0],[0,0,0]],dtype=input.dtype)
+temp_w[0,1,:,:] =  numpy.asarray([[0,0,0],[0,1,0],[0,0,0]],dtype=input.dtype)
+temp_w[0,2,:,:] =  numpy.asarray([[0,0,0],[0,1,0],[0,0,0]],dtype=input.dtype)
 
 W.set_value(temp_w)
 
@@ -72,30 +67,21 @@ W_prime = theano.shared( numpy.asarray(
             rng.uniform(
                 low=-1.0 / w_bound,
                 high=1.0 / w_bound,
-                size=w_shp),
+                size=w_prime_shp),
             dtype=input.dtype), name ='W_prime')
 
 temp_w_prime = W_prime.get_value()
-temp_w_prime[0,0,:,:] =  numpy.asarray(np.vstack(( -1*np.ones((1,3)),  0.6*np.ones((1,3)),  0.01*np.ones((1,3)))),dtype=input.dtype)
-temp_w_prime[0,1,:,:] =  numpy.asarray(np.vstack(( -0.1*np.ones((1,3)),  0.6*np.ones((1,3)),  0.01*np.ones((1,3)))),dtype=input.dtype)
-temp_w_prime[0,2,:,:] =  numpy.asarray(np.vstack(( -0.1*np.ones((1,3)),  0.6*np.ones((1,3)),  0.01*np.ones((1,3)))),dtype=input.dtype)
+
+
+
+#temp_w_prime[0,0,:,:] =  numpy.asarray(np.vstack(( 3*np.ones((1,3)),  -8*np.ones((1,3)),  3*np.ones((1,3)))),dtype=input.dtype)
+temp_w_prime[0,0,:,:] =  numpy.asarray([[-4,1,0],[-4,1,0],[0,1,0]],dtype=input.dtype)
 
 
 
 W_prime.set_value(temp_w_prime)
-#temp_w[0,0,:,:] = np.hstack(( -0.1*np.ones((3,1)),  0.6*np.ones((3,1)),  -0.4*np.ones((3,1))))
 
 
-
-
-
-
-
-# initialize shared variable for bias (1D tensor) with random values
-# IMPORTANT: biases are usually initialized to zero. However in this
-# particular application, we simply apply the convolutional layer to
-# an image without learning the parameters. We therefore initialize
-# them to random values to "simulate" learning.
 b_shp = (1,)
 b = theano.shared(numpy.asarray(
             rng.uniform(low=-.5, high=.5, size=b_shp),
@@ -103,46 +89,16 @@ b = theano.shared(numpy.asarray(
 
 # build symbolic expression that computes the convolution of input with filters in w
 conv_out = conv.conv2d(input, W)
+f_only_one_conv = theano.function([input],conv_out)
 
 
-conv_out_prime = conv.conv2d(conv_out, W_prime)
-
-# build symbolic expression to add bias and apply activation function, i.e. produce neural net layer output
-# A few words on ``dimshuffle`` :
-#   ``dimshuffle`` is a powerful tool in reshaping a tensor;
-#   what it allows you to do is to shuffle dimension around
-#   but also to insert new ones along which the tensor will be
-#   broadcastable;
-#   dimshuffle('x', 2, 'x', 0, 1)
-#   This will work on 3d tensors with no broadcastable
-#   dimensions. The first dimension will be broadcastable,
-#   then we will have the third dimension of the input tensor as
-#   the second of the resulting tensor, etc. If the tensor has
-#   shape (20, 30, 40), the resulting tensor will have dimensions
-#   (1, 40, 1, 20, 30). (AxBxC tensor is mapped to 1xCx1xAxB tensor)
-#   More examples:
-#    dimshuffle('x') -> make a 0d (scalar) into a 1d vector
-#    dimshuffle(0, 1) -> identity
-#    dimshuffle(1, 0) -> inverts the first and second dimensions
-#    dimshuffle('x', 0) -> make a row out of a 1d vector (N to 1xN)
-#    dimshuffle(0, 'x') -> make a column out of a 1d vector (N to Nx1)
-#    dimshuffle(2, 0, 1) -> AxBxC to CxAxB
-#    dimshuffle(0, 'x', 1) -> AxB to Ax1xB
-#    dimshuffle(1, 'x', 0) -> AxB to Bx1xA
-#output = T.nnet.sigmoid(conv_out + b.dimshuffle('x', 0, 'x', 'x'))
-
-# create theano function to compute filtered images
+conv_out_prime_t = conv.conv2d(conv_out, W_prime)
 
 
 
-#f = theano.function([input], conv_out)
-#f2 = theano.function([conv_out], conv_out)
+#conv_out_prime = conv.conv2d(conv_out_prime_t, W_prime)
 
-
-
-
-
-
+f_conv_and_un_conv = theano.function([input],conv_out_prime_t)
 
 #------max pool
 
@@ -155,9 +111,15 @@ up_pool_out = pool_out.repeat(20, axis = 2).repeat(20, axis = 3)
 
 #theano.config.exception_verbosity = 'high'
 
-conv_out_prime2 = conv.conv2d(up_pool_out, W_prime)
-f3 = theano.function([input],conv_out_prime2)
 
+f3 = theano.function([input],up_pool_out)
+
+conv_out_prime2 = conv.conv2d(up_pool_out, W_prime)
+
+conv_out_no_pool_prime2 = conv.conv2d(conv_out, W_prime)
+
+f4 = theano.function([input],conv_out_prime2)
+f_rev_conv = theano.function([input],conv_out_no_pool_prime2)
 
 
 
@@ -204,9 +166,7 @@ f3 = theano.function([input],conv_out_prime2)
 #    return upsamp
 
 
-import numpy
-import pylab
-from PIL import Image
+
 
 # open random image of dimensions 639x516
 
@@ -224,26 +184,37 @@ img = numpy.asarray(img, dtype='float32') / 256.
 
 # put image in 4D tensor of shape (1, 3, height, width)
 img_ = img.transpose(2, 0, 1).reshape(1, 3, 639, 516)
+
+image_1_conv = f_only_one_conv(img_)
+image_conv_unconv = f_conv_and_un_conv(img_)
 filtered_img = f3(img_)
+filtered_img2 = f4(img_)
+filtered_img_1_conv = f_only_one_conv(img_)
+filtered_img_1_conv_rev = f_rev_conv(img_)
 
 # plot original image and first and second components of output
-pylab.subplot(1, 3, 1); pylab.axis('off'); pylab.imshow(img)
+pylab.subplot(2, 4, 1); pylab.axis('off'); pylab.imshow(img)
 pylab.gray();
 # recall that the convOp output (filtered image) is actually a "minibatch",
 # of size 1 here, so we take index 0 in the first dimension:
-pylab.subplot(1, 3, 2); pylab.axis('off'); pylab.imshow(filtered_img[0, 0, :, :])
-pylab.subplot(1, 3, 3); pylab.axis('off'); pylab.imshow(img_[0, 1, :, :])
+pylab.subplot(2, 4, 2); pylab.axis('off'); pylab.imshow(image_1_conv[0, 0, :, :])
+pylab.subplot(2, 4, 3); pylab.axis('off'); pylab.imshow(image_conv_unconv[0, 0, :, :])
+pylab.subplot(2, 4, 4); pylab.axis('off'); pylab.imshow(filtered_img_1_conv[0, 0, :, :])
+pylab.subplot(2, 4, 5); pylab.axis('off'); pylab.imshow(img_[0, 0, :, :])
+pylab.subplot(2, 4, 6); pylab.axis('off'); pylab.imshow(filtered_img_1_conv[0, 0, :, :])
+pylab.subplot(2, 4, 7); pylab.axis('off'); pylab.imshow(filtered_img_1_conv_rev[0, 0, :, :])
+#filtered_img_1_conv
 pylab.show()
 
-io.imshow(filtered_img[0, 0, :, :])
-io.show()
+###io.imshow(filtered_img[0, 0, :, :])
+###io.show()
 
 
 
-fig, ax = plt.subplots()
-im = ax.imshow(filtered_img[0, 0, :, :], interpolation='none')
-ax.format_coord = Formatter(im)
-plt.show()
+###fig, ax = plt.subplots()
+###im = ax.imshow(filtered_img[0, 0, :, :], interpolation='none')
+###ax.format_coord = Formatter(im)
+###plt.show()
  #def get_reconstructed_input(self, hidden):
  #       """ Computes the reconstructed input given the values of the hidden layer """
  #       repeated_conv = conv.conv2d(input = hidden, filters = self.W_prime, border_mode='full')

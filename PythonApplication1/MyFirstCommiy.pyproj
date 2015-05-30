@@ -6,8 +6,8 @@
     <ProjectGuid>aa9b0b5a-134c-4638-8622-a35e8838eac2</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>try_out\try_convolution.py</StartupFile>
-    <SearchPath>indian_autoencoder\custom_io\;custom_io\</SearchPath>
+    <StartupFile>experiments\Test_MLP_on_single_subject.py</StartupFile>
+    <SearchPath>indian_autoencoder\custom_io\;custom_io\;MyUtil\;using_keras\;..\..\..\..\..\..\..\GIT\Theano\;..\..\..\..\..\..\..\Anaconda\Lib\site-packages\keras-master\keras\</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>MyFirstCommiy</Name>
@@ -18,10 +18,8 @@
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
     <InterpreterArguments>
     </InterpreterArguments>
-    <InterpreterId>
-    </InterpreterId>
-    <InterpreterVersion>
-    </InterpreterVersion>
+    <InterpreterId>{9a7a9026-48c1-4688-9d5d-e5699d47d074}</InterpreterId>
+    <InterpreterVersion>2.7</InterpreterVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,6 +41,7 @@
     <Compile Include="custom_io\__init__.py" />
     <Compile Include="dA.py" />
     <Compile Include="DBN.py" />
+    <Compile Include="experiments\Test_MLP_on_single_subject.py" />
     <Compile Include="HelperForThesisData\LoadThesisData.py">
       <SubType>Code</SubType>
     </Compile>
@@ -71,6 +70,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="IndicoTutorial\load.py" />
+    <Compile Include="MyUtil\MyUtils.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MyUtil\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="try_out\go_over_theano_debug.py">
       <SubType>Code</SubType>
     </Compile>
@@ -80,6 +85,7 @@
     <Compile Include="try_out\Print.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="try_out\simple_CAE.py" />
     <Compile Include="try_out\simple_convolutional.py">
       <SubType>Code</SubType>
     </Compile>
@@ -139,7 +145,16 @@
     <Compile Include="using_keras\KerasAutoencoder.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="using_keras\MyKeraCAE.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="using_keras\ReverseMaxDepool.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="using_keras\simple_sandbox.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="using_keras\SolveP300MLP.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="using_keras\test_inheritance.py">
@@ -162,8 +177,13 @@
     <Folder Include="HelperForThesisData\" />
     <Folder Include="indian_autoencoder\" />
     <Folder Include="custom_io\" />
+    <Folder Include="MyUtil\" />
+    <Folder Include="experiments\" />
     <Folder Include="using_keras\" />
     <Folder Include="try_out\" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="{9a7a9026-48c1-4688-9d5d-e5699d47d074}\2.7" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

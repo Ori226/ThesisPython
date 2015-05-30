@@ -97,3 +97,17 @@ def FromFileListToArray(file_list, var_name, subset_size = None):
             return_value = np.r_[return_value, mat]        
     
     return return_value
+
+
+def LoadSingleSubject():
+    
+    
+    #train_size = int(round(number_of_elements*(1.0 - (1.0/n_fold))))
+
+    target_files = ["C:\\Users\\ori22_000\\Documents\\Thesis\\code_and_matlab\\flattened_data\\all_target_RSVP_Color116msVPgcb.mat"]
+
+    non_target_files = ["C:\\Users\\ori22_000\\Documents\\Thesis\\code_and_matlab\\flattened_data\\non_target_RSVP_Color116msVPgcd.mat"]
+
+    all_target = FromFileListToArray(target_files, 'all_target_flatten', 600)
+    all_non_target = FromFileListToArray(non_target_files, 'all_non_target_flatten',600 )
+    return [all_target, all_non_target]

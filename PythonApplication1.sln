@@ -7,8 +7,6 @@ Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "MyFirstCommiy", "PythonAppl
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "TheanoCode", "..\TheanoCode\TheanoCode.pyproj", "{70B536F8-F56D-4265-B0B4-519C8E27BBDE}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewFolder1", "NewFolder1", "{6924B83D-5158-4B6A-AD33-5CBAE3BC0314}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
