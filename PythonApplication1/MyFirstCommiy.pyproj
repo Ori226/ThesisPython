@@ -6,7 +6,7 @@
     <ProjectGuid>aa9b0b5a-134c-4638-8622-a35e8838eac2</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>experiments\Test_MLP_on_single_subject.py</StartupFile>
+    <StartupFile>using_keras\Try1DConv.py</StartupFile>
     <SearchPath>indian_autoencoder\custom_io\;custom_io\;MyUtil\;using_keras\;..\..\..\..\..\..\..\GIT\Theano\;..\..\..\..\..\..\..\Anaconda\Lib\site-packages\keras-master\keras\</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
